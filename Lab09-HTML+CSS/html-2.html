@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paletă de Culori</title>
+    <style>
+        body {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+
+        .color-container {
+            text-align: center;
+            width: 100%;
+        }
+
+        .color-box {
+            width: 100px;
+            height: 100px;
+            margin: 10px;
+            border: 1px solid #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="color-container">
+        <h1>Cerinta 6</h1>
+        <script>
+            // Funcția pentru generarea paletă de culori
+            function generateColorPalette() {
+                const colorContainer = document.body.querySelector('.color-container');
+
+                for (let saturation = 0; saturation <= 100; saturation += 10) {
+                    const colorBox = document.createElement('div');
+                    colorBox.classList.add('color-box');
+                    colorBox.style.backgroundColor = `hsl(240, ${saturation}%, 50%)`;
+                    colorBox.innerText = `hsl(240, ${saturation}%, 50%)`;
+
+                    colorContainer.appendChild(colorBox);
+                }
+            }
+
+            // Apelarea funcției pentru generarea paletă de culori
+            generateColorPalette();
+        </script>
+    </div>
+</body>
+</html>
