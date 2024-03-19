@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Încărcare Fișiere Imagine</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        #fileInput {
+            margin-bottom: 10px;
+        }
+
+        #fileInfo {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<input type="file" id="fileInput" accept=".jpeg, .jpg, .png, .gif, .bmp" onchange="handleFileSelect()">
+
+<div id="fileInfo"></div>
+
+<script>
+    function handleFileSelect() {
+        const fileInput = document.getElementById('fileInput');
+        const fileInfo = document.getElementById('fileInfo');
+
+        const selectedFile = fileInput.files[0];
+
+        if (selectedFile) {
+            const fileName = selectedFile.name;
+            const fileExtension = fileName.split('.').pop().toLowerCase();
+
+            const allowedExtensions = ['jpeg', 'jpg', 'png', 'gif', 'bmp'];
+
+            if (allowedExtensions.includes(fileExtension)) {
+                fileInfo.innerHTML = `<p>Nume fișier: ${fileName}</p>
+                                      <p>Extensie: ${fileExtension}</p>`;
+            } else {
+                fileInfo.innerHTML = `<p>Fișierul selectat nu este o imagine validă.</p>`;
+            }
+        } else {
+            fileInfo.innerHTML = `<p>Niciun fișier selectat.</p>`;
+        }
+    }
+</script>
+
+</body>
+</html>

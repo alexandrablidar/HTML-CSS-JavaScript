@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title></title>
+  <style>
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    #myDiv {
+      width: 100px;
+      height: 100px;
+      background-color: red;
+      transition: background-color 0.3s;
+    }
+  </style>
+</head>
+<body>
+
+<div id="myDiv"></div>
+
+<script>
+  var div = document.getElementById("myDiv");
+
+  function calculateDistance(clientX, clientY, rect) {
+    var divX = rect.left + rect.width / 2;
+    var divY = rect.top + rect.height / 2;
+
+    var distance = Math.sqrt(Math.pow(clientX - divX, 2) + Math.pow(clientY - divY, 2));
+    return distance;
+  }
+
+  function updateColor(event) {
+    var mouseX = event.clientX;
+    var mouseY = event.clientY;
+
+    var divRect = div.getBoundingClientRect();
+    var distance = calculateDistance(mouseX, mouseY, divRect);
+
+    // Maparea distanței la un interval de 0-100 pentru a stabili opacitatea
+    var opacity = 1 - Math.min(distance, 100) / 100;
+
+    // Calcularea culorii în funcție de opacitate (înspre visiniu)
+    var hue = 300;  // Valoarea pentru nuanța de visiniu
+    var saturation = '100%';
+    var lightness = 50 - (opacity * 50) + '%';
+
+    div.style.backgroundColor = 'hsl(' + hue + ', ' + saturation + ', ' + lightness + ')';
+  }
+
+  // Adăugarea evenimentului pentru a actualiza culoarea pe măsură ce mouse-ul se mișcă
+  document.addEventListener("mousemove", updateColor);
+
+</script>
+
+</body>
+</html>

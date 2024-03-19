@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title></title>
+  <style>
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    #myDiv {
+      width: 100px;
+      height: 100px;
+      background-color: red;
+      transition: background-color 0.3s;
+    }
+  </style>
+</head>
+<body>
+
+<div id="myDiv"></div>
+
+<script>
+  var div = document.getElementById("myDiv");
+  var currentColor = 0; // 0 reprezintă roșu, 255 reprezintă albastru
+  var intervalId;
+
+  function changeColor() {
+    currentColor += 5; // Incrementăm progresiv valoarea culorii
+
+    if (currentColor > 255) {
+      currentColor = 255;
+      clearInterval(intervalId); // Oprim setInterval când am ajuns la albastru
+    }
+
+    div.style.backgroundColor = "rgb(0, 0, " + currentColor + ")";
+  }
+
+  div.addEventListener("mouseover", function() {
+    // Setăm un interval pentru a apela funcția changeColor la fiecare 50 de milisecunde
+    intervalId = setInterval(changeColor, 50);
+  });
+
+  div.addEventListener("mouseout", function() {
+    clearInterval(intervalId); // Oprim setInterval când mouse-ul nu mai este deasupra
+    div.style.backgroundColor = "red"; // Resetăm culoarea la roșu
+    currentColor = 0; // Resetăm valoarea culorii la 0
+  });
+</script>
+
+</body>
+</html>

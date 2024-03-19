@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(5, 50px);
+            grid-template-rows: repeat(5, 50px);
+            gap: 1px;
+        }
+
+        .grid-item {
+            width: 50px;
+            height: 50px;
+            border: 1px solid #000;
+            text-align: center;
+            line-height: 50px;
+        }
+
+        .start-cell {
+            background-color: lightblue;
+        }
+    </style>
+</head>
+<body>
+
+<div class="grid-container" id="grid">
+    <!-- Grid items will be dynamically generated here -->
+</div>
+
+<script>
+    const gridSize = 5; // Size of the grid
+    let currentPosition = { row: 0, col: 0 };
+
+    // Function to create the grid
+    function createGrid() {
+        const grid = document.getElementById('grid');
+        for (let row = 0; row < gridSize; row++) {
+            for (let col = 0; col < gridSize; col++) {
+                const cell = document.createElement('div');
+                cell.classList.add('grid-item');
+                if (row === 0 && col === 0) {
+                    cell.classList.add('start-cell');
+                }
+                grid.appendChild(cell);
+            }
+        }
+    }
+
+    // Function to handle key presses
+    function handleKeyPress(event) {
+        switch (event.key) {
+            case 'ArrowUp':
+                move(-1, 0);
+                break;
+            case 'ArrowDown':
+                move(1, 0);
+                break;
+            case 'ArrowLeft':
+                move(0, -1);
+                break;
+            case 'ArrowRight':
+                move(0, 1);
+                break;
+            default:
+                break;
+        }
+    }
+
+    // Function to update the grid based on the new position
+    function updateGrid() {
+        const cells = document.querySelectorAll('.grid-item');
+        cells.forEach(cell => cell.classList.remove('start-cell'));
+        const index = currentPosition.row * gridSize + currentPosition.col;
+        cells[index].classList.add('start-cell');
+    }
+
+    // Function to move the start cell
+    function move(rowChange, colChange) {
+        const newRow = currentPosition.row + rowChange;
+        const newCol = currentPosition.col + colChange;
+
+        // Check if the new position is within the grid
+        if (newRow >= 0 && newRow < gridSize && newCol >= 0 && newCol < gridSize) {
+            currentPosition.row = newRow;
+            currentPosition.col = newCol;
+            updateGrid();
+        }
+    }
+
+    // Initialize the grid
+    createGrid();
+
+    // Attach keydown event listener to the document
+    document.addEventListener('keydown', handleKeyPress);
+</script>
+
+</body>
+</html>

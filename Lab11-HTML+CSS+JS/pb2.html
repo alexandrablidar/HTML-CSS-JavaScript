@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pagina web cu JavaScript</title>
+  <style>
+    body {
+      display: flex;
+      flex-wrap: wrap;
+      align-content: flex-start;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .color-box {
+      width: 50px;
+      height: 50px;
+      margin: 5px;
+      border: 1px solid #000;
+    }
+
+    #colorCode {
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+<div id="colorCode">Aduți mouse-ul peste o culoare</div>
+
+<script>
+  var colorBoxes = document.querySelectorAll('.color-box');
+  var colorCode = document.getElementById('colorCode');
+
+  // Culorile prestabilite pentru cele 10 componente div
+  var colors = ['#ff0000', '#ff7f00', '#ffff00', '#7fff00', '#00ff00', '#00ff7f', '#00ffff', '#007fff', '#0000ff', '#7f00ff'];
+
+  colorBoxes.forEach(function(box, index) {
+    box.style.backgroundColor = colors[index];
+    box.addEventListener('mouseover', function() {
+      colorCode.style.color = colors[index];
+      colorCode.textContent = "Cod culoare: " + colors[index];
+      box.style.transform = 'scale(1.1)'; // Efect de scalare la hover
+    });
+    box.addEventListener('mouseout', function() {
+      colorCode.textContent = "Aduți mouse-ul peste o culoare";
+      box.style.transform = 'scale(1)';
+    });
+  });
+
+</script>
+
+</body>
+</html>

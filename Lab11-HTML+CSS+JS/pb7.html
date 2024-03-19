@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+        #info {
+            font-size: 18px;
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="info"></div>
+
+<script>
+    // Function to display page information
+    function displayPageInfo() {
+        const infoElement = document.getElementById('info');
+
+        // Page URL components
+        const host = window.location.host;
+        const hostname = window.location.hostname;
+        const href = window.location.href;
+        const pathname = window.location.pathname;
+        const port = window.location.port;
+        const protocol = window.location.protocol;
+
+        // Browser information
+        const browserName = detectBrowser();
+
+        // Display information
+        infoElement.innerHTML = `
+            <p><strong>Host:</strong> ${host}</p>
+            <p><strong>Hostname:</strong> ${hostname}</p>
+            <p><strong>Href:</strong> ${href}</p>
+            <p><strong>Pathname:</strong> ${pathname}</p>
+            <p><strong>Port:</strong> ${port}</p>
+            <p><strong>Protocol:</strong> ${protocol}</p>
+            <p><strong>Browser:</strong> ${browserName}</p>
+        `;
+    }
+
+    // Function to detect the browser
+    function detectBrowser() {
+        const userAgent = navigator.userAgent;
+        let browserName = "Unknown";
+
+        if (userAgent.includes("Chrome")) {
+            browserName = "Google Chrome";
+        } else if (userAgent.includes("Firefox")) {
+            browserName = "Mozilla Firefox";
+        } else if (userAgent.includes("Safari")) {
+            browserName = "Safari";
+        } else if (userAgent.includes("Edge")) {
+            browserName = "Microsoft Edge";
+        } else if (userAgent.includes("Opera") || userAgent.includes("OPR")) {
+            browserName = "Opera";
+        } else if (userAgent.includes("MSIE") || userAgent.includes("Trident")) {
+            browserName = "Internet Explorer";
+        }
+
+        return browserName;
+    }
+
+    // Initial display
+    displayPageInfo();
+</script>
+
+</body>
+</html>

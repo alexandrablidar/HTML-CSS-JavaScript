@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input {
+            margin-bottom: 10px;
+        }
+
+        #rezultat {
+            margin-top: 20px;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+<form id="formularDate" onsubmit="valideazaDate(event)">
+    <label for="dataInceput">Introduceți data de început:</label>
+    <input type="date" id="dataInceput" required>
+
+    <label for="dataSfarsit">Introduceți data de sfârșit:</label>
+    <input type="date" id="dataSfarsit" required>
+
+    <button type="submit">Validează Datele</button>
+</form>
+
+<div id="rezultat"></div>
+
+<script>
+    function valideazaDate(event) {
+        event.preventDefault();// Evită comportamentul implicit al formularului (de a reîncărca pagina)
+
+        const inputDataInceput = document.getElementById('dataInceput');
+        const inputDataSfarsit = document.getElementById('dataSfarsit');
+        const divRezultat = document.getElementById('rezultat');
+
+        const dataInceput = new Date(inputDataInceput.value);
+        const dataSfarsit = new Date(inputDataSfarsit.value);
+
+        if (!isNaN(dataInceput.getTime()) && !isNaN(dataSfarsit.getTime())) {
+            const diferentaInLuni = (dataSfarsit.getFullYear() - dataInceput.getFullYear()) * 12 +
+                                       dataSfarsit.getMonth() - dataInceput.getMonth();
+
+            if (diferentaInLuni > 3) {
+                divRezultat.textContent = 'Datele sunt valide. Intervalul este mai mare de 3 luni.';
+                divRezultat.style.color = 'green';
+            } else {
+                divRezultat.textContent = 'Intervalul trebuie să fie mai mare de 3 luni.';
+                divRezultat.style.color = 'red';
+            }
+        } else {
+            divRezultat.textContent = 'Introduceți date valide în ambele câmpuri.';
+            divRezultat.style.color = 'red';
+        }
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        #inputX, #inputY {
+            width: 60px;
+            margin-right: 10px;
+        }
+
+        #buttonPosition {
+            margin-top: 10px;
+        }
+
+        #cerc {
+            width: 50px;
+            height: 50px;
+            background-color: lightblue;
+            border-radius: 50%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: top 0.5s, left 0.5s;
+        }
+    </style>
+</head>
+<body>
+
+<form id="formularCerc">
+    <label for="inputX">Coordonata X:</label>
+    <input type="number" id="inputX" min="100" max="400" >
+
+    <label for="inputY">Coordonata Y:</label>
+    <input type="number" id="inputY" min="100" max="400" >
+
+    <button type="button" id="buttonPosition" onclick="pozitioneazaCerc()">Pozitionează Cerc</button>
+</form>
+
+<div id="cerc"></div>
+
+<script>
+    function pozitioneazaCerc() {
+        const inputX = document.getElementById('inputX').value;
+        const inputY = document.getElementById('inputY').value;
+
+        // Verificăm dacă valorile introduse sunt între 100 și 400
+        if (inputX >= 100 && inputX <= 400 && inputY >= 100 && inputY <= 400) {
+            const cerc = document.getElementById('cerc');
+            cerc.style.left = inputX + 'px';
+            cerc.style.top = inputY + 'px';
+        } else {
+            alert('Valorile trebuie să fie între 100 și 400.');
+        }
+    }
+</script>
+
+</body>
+</html>

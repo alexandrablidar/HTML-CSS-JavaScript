@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+        .grid-item {
+            width: 50px;
+            height: 50px;
+            border: 1px solid #ddd;
+            display: inline-block;
+	}/*ex3*/
+       
+        .culoriPres {
+            width: 50px;
+            height: 50px;
+            margin: 5px;
+            display: inline-block;
+	}
+
+        .culoriRandom {
+            width: 50px;
+            height: 50px;
+            margin: 5px;
+            display: inline-block;
+        }/*ex2*/
+
+	.div4{
+	    background-color: LightPink;
+	    font-family: "Lucida Handwriting", Cursive;
+	}
+
+	.div2{
+	    display: inline-block;
+	}
+
+	.div21{
+	    display: inline-block;
+	    float: right;
+	}
+    </style>
+</head>
+<body >
+
+<h3>Cerinta 3</h3>
+
+<div id="gridContainer"></div>
+
+<h3>Cerinta 1</h3>
+
+<div id="Ex2"></div>
+
+<h3>Cerinta 2</h3>
+
+<div id="culPrestabilite" class="div2"></div>
+
+<div id="culRandom" class="div21"></div>
+
+<h3>Cerinta 4</h3>
+
+<p id="txt" class="div4">jdjdsnjdls384u3482394uj3r23r3c222nrwr43w8co3w3wc3r4mr3833</p>
+<div id="litere" class="div4"></div>
+<div id="cifre" class="div4"></div>
+<div id="cifreInloc" class="div4"></div>
+
+<h3>Cerinta 5</h3>
+
+<p id="sir" class="div4"> 7, 5, 65, 556, -764, -8, -5, -20, -10</p>
+<div id="pozPare" class="div4"></div>
+<div id="elemNeg" class="div4"></div>
+<div id="minLocal" class="div4"></div>
+
+<script>
+  
+    const matrice = [
+        [0, 1, 0, 1, 0, 1],
+        [1, 0, 1, 0, 1, 1],
+        [0, 1, 0, 1, 0, 1],
+        [1, 0, 1, 0, 1, 1],
+        [0, 1, 0, 1, 0, 1],
+    ];
+
+
+    const gridContainer = document.getElementById('gridContainer');
+
+    for (let i = 0; i < matrice.length; i++) {
+        for (let j = 0; j < matrice[i].length; j++) {
+            const gridItem = document.createElement('div');
+            gridItem.className = 'grid-item';
+            gridItem.style.backgroundColor = matrice[i][j] === 1 ? 'hsla(9, 100%, 64%, 0.5)' : 'LightBlue'; 
+            gridContainer.appendChild(gridItem);    
+        }
+	gridContainer.appendChild(document.createElement('br'));
+    }//ex3
+
+
+    const myDiv = document.getElementById('Ex2');
+
+    myDiv.style.backgroundColor = "LightGray";
+    myDiv.innerHTML = "<p>Text predefinit pentru primul div.</p>";
+    
+    var innerDiv = document.createElement('div');
+    
+    innerDiv.style.backgroundColor = "DarkGray";
+    innerDiv.innerHTML = "<p>Textul incapsulat in div-ul din interiorul primului div.</p>";
+    
+    myDiv.appendChild(innerDiv);	
+
+   var innerP = document.createElement('p');
+   innerP.textContent = "Textul din interiorul paragrafului.";
+
+   myDiv.appendChild(innerP);
+
+   var imagine = document.createElement('img');
+
+   imagine.style.margin = "10px";
+   imagine.src = "t&j.png";
+   imagine.alt = "Aceasta este imaginea inclusa in div.";
+
+   myDiv.appendChild(imagine);//ex1
+
+   
+   const culPresDiv = document.getElementById('culPrestabilite');
+
+   var culPres = ["#ff0000", "#00ff00", "#0000ff", "#ffff00", "#ff00ff", "#00ffff", "#c0c0c0", "#800080", "#008080", "#ff4500"];
+
+   culPres.forEach(function(culoare) {
+        var divPres = document.createElement('div');
+        divPres.className = 'culoriPres';
+        divPres.style.backgroundColor = culoare;
+        culPresDiv.appendChild(divPres);
+   });
+
+   const culRandomDiv = document.getElementById('culRandom');
+
+   function getRandomColor() {
+        var sir = '0123456789ABCDEF';
+        var culoare = '#';
+        for (var i = 0; i < 6; i++) {
+            culoare += sir[Math.floor(Math.random() * 16)];
+        }
+        return culoare;
+   } /*culori += sir[Math.floor(Math.random() * 16)]; - In interiorul buclei, se adauga la culoare un caracter ales aleator din sirul sir. Math.random() returneaza un numar intre 0 si 1, iar Math.floor() il rotunjeste in jos la cea mai apropiata valoare intreaga. Astfel, Math.random() * 16 genereaza un numar intreg intre 0 si 15, inclusiv, care este apoi utilizat pentru a accesa un caracter corespunzator in sirul sir*/  
+
+   for(var i = 0; i < 10;  i++){
+	var divRandom = document.createElement("div");
+	divRandom.className = "culoriRandom";
+	divRandom.style.backgroundColor = getRandomColor();
+	culRandomDiv.appendChild(divRandom);
+   };//Ex2
+ 
+
+   const litereDiv = document.getElementById('litere');
+   const cifreDiv = document.getElementById('cifre');
+   const cifreInlocDiv = document.getElementById('cifreInloc');
+
+
+   const textP = document.getElementById('txt');
+   var text = textP.textContent;
+
+   var l = "";
+   var c = "";
+   var tInloc = "";
+
+   for (var i = 0; i < text.length; i++) {
+        var char = text[i];
+/*isNaN(char): Aceasta este functia care verifica dacă char nu este un numar. Daca char nu este un numar, isNaN() returneaza true; in caz contrar, returneaza false.*/
+        if (isNaN(char)) {
+            l += char;
+	    tInloc += char;
+        } else {
+            tInloc += '*';
+            c += char;
+        }
+   }
+    
+   litereDiv.textContent = l;
+   cifreDiv.textContent = c;
+   cifreInloc.textContent = tInloc;//Ex4
+
+	const pozPareDiv = document.getElementById('pozPare');
+	const elemNegDiv = document.getElementById('elemNeg');
+	const minLocalDiv = document.getElementById('minLocal');
+
+	var sir =  [7, 5, 65, 556, -764, -8, -5, -20, -10];
+
+	var pozPare = "";
+	var elemNeg = "";
+	var minLocal = "";
+	var contor = 0;
+
+	for(var i = 0; i < sir.length; i++){
+
+		var pozCurenta = sir[i];
+		var pozAnterioara = sir[i-1];
+		var pozViitoare = sir[i+1];
+
+		if(pozCurenta > 0 && pozCurenta % 2 === 0)
+			pozPare += pozCurenta + " ";
+		if(pozCurenta < 0 && Math.abs(pozCurenta) > 9)
+			elemNeg += pozCurenta + " ";
+		if(pozCurenta < pozAnterioara && pozCurenta < pozViitoare && pozAnterioara !== undefined && pozViitoare !== undefined){
+			minLocal += pozCurenta + " ";
+			contor++;
+		}
+	}
+
+	pozPareDiv.textContent = pozPare;
+	elemNegDiv.textContent = elemNeg;
+	minLocalDiv.textContent= contor + " " + minLocal;
+
+</script>
+
+</body>
+</html>
